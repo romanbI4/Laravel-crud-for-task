@@ -35,10 +35,10 @@ Route::get('/registration', function () {
 })->name('registration');
 
 Route::post('/registration', 'AuthController@registration');
+
 Route::get('/logout', 'AuthController@logout')->name('logout');
 
-Route::get('tasks', [TasksController::class, 'index'])->name('tasks');
-Route::get('tasks/{id}', [TasksController::class, 'show']);
-Route::post('tasks/create', [TasksController::class, 'store']);
-Route::put('tasks/{id}', [TasksController::class, 'update']);
-Route::delete('tasks/{id}', [TasksController::class, 'delete']);
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('/tasks', 'TasksController');
+});
+

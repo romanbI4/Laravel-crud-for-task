@@ -17,11 +17,11 @@ class AuthController extends Controller
         if (!Auth::attempt($request->only('email', 'password'), $request->has('remember'))) {
             return redirect()
                 ->back()
-                ->with('danger', 'Incorrect login or password');
+                ->with('message', 'Incorrect login or password');
         } else {
             return redirect()
-                ->route('tasks')
-                ->with('success', 'You have successfully registered');
+                ->route('tasks.index')
+                ->with('message', 'You have successfully logged');
         }
     }
 
@@ -36,8 +36,8 @@ class AuthController extends Controller
         Auth::loginUsingId($user->id);
 
         return redirect()
-            ->route('tasks')
-            ->with('success', 'You have successfully registered');
+            ->route('tasks.index')
+            ->with('message', 'You have successfully registered');
     }
 
     public function logout(): Redirector|Application|RedirectResponse
@@ -45,6 +45,6 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()
             ->route('login')
-            ->with('success', 'You have successfully logout');
+            ->with('message', 'You have successfully logout');
     }
 }
