@@ -4,10 +4,11 @@ namespace App\Repositories;
 
 use App\Interfaces\TasksRepositoryInterface;
 use App\Models\Tasks;
+use Illuminate\Support\Collection;
 
 class TasksRepository implements TasksRepositoryInterface
 {
-    public function getAllTasks(): \Illuminate\Support\Collection
+    public function getAllTasks(): Collection
     {
         return Tasks::all();
     }
