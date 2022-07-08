@@ -1,15 +1,15 @@
-## Сделать CRUD на Laravel с сохранением данных в БД MySQL.
+## Make CRUD on Laravel with saving data in MySQL database.
 
-## ТЗ:
+## Technical task:
 
-Функции приложения:
-- регистрация\авторизация
-- добавление новых записей
-- просмотр и редактирование существующих записей
-- удаление записей
+Application features:
+- registration\authorization
+- adding new entries
+- viewing and editing existing entries
+- deleting entries
 
-Для фронта можете использовать bootstrap.
+For the front you can use bootstrap.
 
-Создание таблиц реализовать через миграции
+Create tables implement through migrations.
 
-[//]: # (![Главная форма приложения]&#40;https://image.prntscr.com/image/Tvk6ECmcQJeKp0aN7Ad8nQ.jpeg&#41;)
+[//]: # (![Application main form]&#40;https://image.prntscr.com/image/Tvk6ECmcQJeKp0aN7Ad8nQ.jpeg&#41;)
