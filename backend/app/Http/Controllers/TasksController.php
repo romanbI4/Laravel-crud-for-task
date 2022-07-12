@@ -13,17 +13,6 @@ class TasksController extends Controller
     public function __construct(TasksRepositoryInterface $tasksRepository)
     {
         $this->tasksRepository = $tasksRepository;
-
-        $this->middleware('auth', [
-            'except' => [
-                'show',
-                'destroy',
-                'store',
-                'delete',
-                'update',
-                'create'
-            ]
-        ]);
     }
 
     public function create()
@@ -40,14 +29,6 @@ class TasksController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name'=>'required',
-            'executor'=>'required',
-            'provider'=>'required',
-            'estimates'=>'required',
-            'deadline'=>'required'
-        ]);
-
         $taskDetails = $request->all();
 
         if ($this->tasksRepository->createTask($taskDetails)) {
@@ -69,14 +50,6 @@ class TasksController extends Controller
 
     public function update($id, Request $request)
     {
-        $request->validate([
-            'name'=>'required',
-            'executor'=>'required',
-            'provider'=>'required',
-            'estimates'=>'required',
-            'deadline'=>'required'
-        ]);
-
         $taskId = $id;
         $taskDetails = $request->only([
             'name',
@@ -89,7 +62,7 @@ class TasksController extends Controller
         if ($this->tasksRepository->updateTask($taskId, $taskDetails)) {
             return redirect()
                 ->route('tasks.index')
-                ->with('message','Tasks updated Successfully');
+                ->with('message', 'Tasks updated Successfully');
         }
 
     }

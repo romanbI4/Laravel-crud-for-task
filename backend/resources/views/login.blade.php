@@ -8,12 +8,12 @@
 
         <div class="form-group">
             {{ Form::label('email', 'Email') }}
-            {{ Form::email('email', Request::old('email'), ['class' => 'form-control']) }}
+            {{ Form::email('email', Request::old('email'), ['class' => 'form-control', 'required' => 'required']) }}
         </div>
 
         <div class="form-group">
             {{ Form::label('password', 'Password') }}
-            {{ Form::password('password', ['class' => 'form-control']) }}
+            {{ Form::password('password', ['class' => 'form-control', 'required' => 'required']) }}
         </div>
 
         {{ Form::submit('Login', ['class' => 'btn btn-primary']) }}
