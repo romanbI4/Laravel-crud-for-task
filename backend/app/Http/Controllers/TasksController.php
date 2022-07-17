@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateRequest;
-use App\Http\Requests\EditRequest;
+use App\Http\Requests\TaskRequest;
 use App\Services\TasksService;
 
 class TasksController extends Controller
@@ -27,7 +26,7 @@ class TasksController extends Controller
         return view('tasks.index', compact('tasks'));
     }
 
-    public function store(CreateRequest $createRequest)
+    public function store(TaskRequest $createRequest)
     {
         if ($this->tasksService->create($createRequest)) {
             return redirect()
@@ -43,7 +42,7 @@ class TasksController extends Controller
         return view('tasks.show', compact('task'));
     }
 
-    public function update($id, EditRequest $editRequest)
+    public function update($id, TaskRequest $editRequest)
     {
         if ($this->tasksService->update($id, $editRequest)) {
             return redirect()
