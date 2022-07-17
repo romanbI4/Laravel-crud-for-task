@@ -4,32 +4,31 @@ namespace App\Repositories;
 
 use App\Interfaces\TasksRepositoryInterface;
 use App\Models\Tasks;
-use Illuminate\Support\Collection;
 
 class TasksRepository implements TasksRepositoryInterface
 {
-    public function getAllTasks(): Collection
+    public function getList()
     {
         return Tasks::all();
     }
 
-    public function getTaskById($taskId)
+    public function getById($id)
     {
-        return Tasks::findOrFail($taskId);
+        return Tasks::findOrFail($id);
     }
 
-    public function deleteTask($taskId)
+    public function delete($id)
     {
-        Tasks::destroy($taskId);
+        return Tasks::destroy($id);
     }
 
-    public function createTask(array $taskDetails)
+    public function create(array $details)
     {
-        return Tasks::create($taskDetails);
+        return Tasks::create($details);
     }
 
-    public function updateTask($taskId, array $newDetails)
+    public function update($id, array $details)
     {
-        return Tasks::whereId($taskId)->update($newDetails);
+        return Tasks::whereId($id)->update($details);
     }
 }

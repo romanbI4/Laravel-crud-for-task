@@ -7,6 +7,8 @@ Application features:
 - adding new entries
 - viewing and editing existing entries
 - deleting entries
+- use patterns for Laravel(Repository and Factory)
+- use Service, custom Request
 
 For the front you can use bootstrap.
 

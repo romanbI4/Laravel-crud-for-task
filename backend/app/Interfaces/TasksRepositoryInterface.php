@@ -4,13 +4,13 @@ namespace App\Interfaces;
 
 interface TasksRepositoryInterface
 {
-    public function getAllTasks();
+    public function getList();
 
-    public function getTaskById($taskId);
+    public function getById($id);
 
-    public function deleteTask($taskId);
+    public function delete($id);
 
-    public function createTask(array $taskDetails);
+    public function create(array $details);
 
-    public function updateTask($taskId, array $newDetails);
+    public function update($id, array $details);
 }

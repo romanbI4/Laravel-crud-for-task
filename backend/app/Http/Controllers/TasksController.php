@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Interfaces\TasksRepositoryInterface;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
+use App\Http\Requests\CreateRequest;
+use App\Http\Requests\EditRequest;
+use App\Services\TasksService;
 
 class TasksController extends Controller
 {
-    private TasksRepositoryInterface $tasksRepository;
+    private TasksService $tasksService;
 
-    public function __construct(TasksRepositoryInterface $tasksRepository)
+    public function __construct(TasksService $tasksService)
     {
-        $this->tasksRepository = $tasksRepository;
+        $this->tasksService = $tasksService;
     }
 
     public function create()
@@ -22,64 +22,49 @@ class TasksController extends Controller
 
     public function index()
     {
-        return view('tasks.index', [
-            'tasks' => $this->tasksRepository->getAllTasks()
-        ]);
+        $tasks = $this->tasksService->getList();
+
+        return view('tasks.index', compact('tasks'));
     }
 
-    public function store(Request $request)
+    public function store(CreateRequest $createRequest)
     {
-        $taskDetails = $request->all();
-
-        if ($this->tasksRepository->createTask($taskDetails)) {
+        if ($this->tasksService->create($createRequest)) {
             return redirect()
                 ->route('tasks.index')
                 ->with('message', 'Task added');
         }
-
     }
 
     public function show($id)
     {
-        $taskId = $id;
-        $task = $this->tasksRepository->getTaskById($taskId);
+        $task = $this->tasksService->getById($id);
 
         return view('tasks.show', compact('task'));
-
     }
 
-    public function update($id, Request $request)
+    public function update($id, EditRequest $editRequest)
     {
-        $taskId = $id;
-        $taskDetails = $request->only([
-            'name',
-            'executor',
-            'provider',
-            'estimates',
-            'deadline'
-        ]);
-
-        if ($this->tasksRepository->updateTask($taskId, $taskDetails)) {
+        if ($this->tasksService->update($id, $editRequest)) {
             return redirect()
                 ->route('tasks.index')
                 ->with('message', 'Tasks updated Successfully');
         }
-
     }
 
     public function edit($id)
     {
-        $taskDetails = $this->tasksRepository->getTaskById($id);
+        $taskDetails = $this->tasksService->getById($id);
 
         return view('tasks.edit', compact('taskDetails'));
     }
 
-    public function destroy($id): RedirectResponse
+    public function destroy($id)
     {
-        $this->tasksRepository->deleteTask($id);
-
-        return redirect()
-            ->route('tasks.index')
-            ->with('message', 'Task deleted');
+        if ($this->tasksService->delete($id)) {
+            return redirect()
+                ->route('tasks.index')
+                ->with('message', 'Task deleted');
+        }
     }
 }
