@@ -17,6 +17,7 @@ services:
       context: ./php-fpm
     volumes:
       - ./../:/var/www
+    restart: always
     ports:
       - "3000:3000"
 
@@ -32,6 +33,7 @@ services:
     # - ./logs:/var/log
     depends_on:
       - php-fpm
+    restart: always
     ports:
       - "80:80"
       - "443:443"
