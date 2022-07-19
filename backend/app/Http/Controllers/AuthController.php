@@ -17,7 +17,7 @@ class AuthController extends Controller
         if (!Auth::attempt($request->only('email', 'password'), $request->has('remember'))) {
             return redirect()
                 ->back()
-                ->with('message', 'Incorrect login or password');
+                ->with('error', 'Incorrect login or password');
         } else {
             return redirect()
                 ->route('tasks.index')

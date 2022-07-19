@@ -1,5 +1,14 @@
 @extends('layout')
-
+@if (session('message'))
+    <div class="alert alert-success">
+        {{ session('message') }}
+    </div>
+@endif
+@if (session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
 @section('content')
     <div class="row">
         <h1 align="center">Login</h1>
