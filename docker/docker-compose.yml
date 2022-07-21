@@ -45,4 +45,4 @@ services:
 networks:
   default:
     external:
-      name: docker_default
+      name: custom_net
