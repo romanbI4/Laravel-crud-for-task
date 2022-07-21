@@ -38,9 +38,6 @@ services:
     ports:
       - "80:80"
       - "443:443"
-    networks:
-      default:
-        ipv4_address: 178.62.254.38
 
 networks:
   default:
